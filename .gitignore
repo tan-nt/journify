@@ -120,3 +120,4 @@ frontend/cypress/snapshots/linux/1x
 ## Data
 database/arxiv-metadata-oai-snapshot.json
 env
+database/arxiv_data.csv

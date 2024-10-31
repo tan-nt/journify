@@ -2,6 +2,7 @@ import streamlit as st
 from config.config import load_config
 from page.about_us import display_about_us
 from page.home import display_home
+from page.data_exploration import display_data_exploration
 
 load_config()
 
@@ -77,10 +78,11 @@ with st.sidebar:
     """
     )
     
-
 # ------------------ Main App UI ------------------ #
 tab1, tab2, tab3, tab4 = st.tabs(["Home", "Article recommendation", "Data exploration", "About Us"])
 with tab1:
     display_home()
+with tab3:
+    display_data_exploration()
 with tab4:
     display_about_us()

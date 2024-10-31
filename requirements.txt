@@ -5,3 +5,4 @@ streamlit
 scikit_learn
 tensorflow
 python-dotenv
+plotly

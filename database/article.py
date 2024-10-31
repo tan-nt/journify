@@ -1,9 +1,9 @@
 import sqlite3
 import json
 
-class ArticleCRUD:
-    def __init__(self, db_path):
-        self.db_path = db_path
+class Article:
+    def __init__(self):
+        self.db_path = "database/arxiv-metadata-oai-snapshot.db"
         self.table_name = "article"
         self._initialize_table()
 
@@ -14,7 +14,7 @@ class ArticleCRUD:
     def _initialize_table(self):
         """Initialize the article table with predefined columns if it doesn't exist."""
         columns = {
-            "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+            "id": "TEXT PRIMARY KEY",
             "submitter": "TEXT",
             "authors": "TEXT",
             "title": "TEXT",
@@ -29,6 +29,7 @@ class ArticleCRUD:
             "update_date": "TEXT",
             "authors_parsed": "TEXT"
         }
+
         with self._connect() as conn:
             cursor = conn.cursor()
             col_defs = ", ".join([f"[{col}] {dtype}" for col, dtype in columns.items()])
@@ -49,7 +50,7 @@ class ArticleCRUD:
             cursor.execute(query, tuple(article_data.values()))
             conn.commit()
 
-    def read_articles(self, limit=10):
+    def read_articles(self, limit=0):
         """Fetch articles from the table.
         
         Args:
@@ -60,7 +61,10 @@ class ArticleCRUD:
         """
         with self._connect() as conn:
             cursor = conn.cursor()
-            cursor.execute(f"SELECT * FROM {self.table_name} LIMIT {limit}")
+            if not limit:
+                cursor.execute(f"SELECT * FROM {self.table_name}")
+            else:
+                cursor.execute(f"SELECT * FROM {self.table_name} LIMIT {limit}")
             results = cursor.fetchall()
             column_names = [description[0] for description in cursor.description]
             return [dict(zip(column_names, row)) for row in results]
@@ -89,3 +93,5 @@ class ArticleCRUD:
             cursor = conn.cursor()
             cursor.execute(f"DELETE FROM {self.table_name} WHERE {condition}")
             conn.commit()
+
+article = Article()

@@ -121,5 +121,4 @@ def display_about_us():
     </div>
     """ + html_content
 
-    # Display HTML content for team and additional info
     html(html_content, height=1400)
