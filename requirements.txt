@@ -2,7 +2,6 @@ pandas
 requests
 numpy
 streamlit
-beautifulsoup4
-pymysql
 scikit_learn
 tensorflow
+python-dotenv
