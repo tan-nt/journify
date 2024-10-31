@@ -81,10 +81,14 @@ with st.sidebar:
 # ------------------ Main App UI ------------------ #
 tab1, tab2, tab3 = st.tabs(["Home", "Exploration", "About Us"])
 with tab1:
-     # Display logo in the sidebar
-    st.sidebar.image("resource/ArXiv_logo.png", use_column_width=True)
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.write(' ')
+    with col2:
+        st.image("resource/ArXiv_logo.png")
+    with col3:
+        st.write(' ')
 
-    # Centered content with the search bar
     st.markdown("<h1 style='text-align: center;'>Welcome to Journify</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; color: gray;'>Explore academic articles with ease</p>", unsafe_allow_html=True)
 
