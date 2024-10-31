@@ -1,67 +1,80 @@
+# Journify - Intelligent Journal Explorer
 
-# Movie Recommender System
+Explore the world of academic research with **Journify**, an AI-powered platform for article recommendations and a smart Q&A chatbot tailored to your interests in the arXiv repository.
 
-RUNNING AT: [http://35.180.50.126:8501/](http://35.180.50.126:8501/)
+## Running at: [Your local machine](http://0.0.0.0:8501/)
+
+---
 
 ## Description
 
-Usually, when I go on Youtube I like to find videos related to Data Science or Deep Learning that I have not seen before.
-However, sporadically I like to find songs, humoristic videos or even watch some matches of professional League of Legends.
-The problem with this is that Youtube would start recommending me music or videogames clips in which I am not really interested.
+Journify is designed to provide researchers, students, and enthusiasts with the most relevant academic articles and a chatbot that answers questions on various subjects. Leveraging cutting-edge AI and machine learning models, Journify offers a unique, personalized research experience.
 
-Then, one night in bed I had a great idea "What if I could create a recommendation system, with different clusters and only see recommendations of the cluster I am interested in". 
+In the world of academic papers, finding the right articles can be challenging. Existing systems may recommend articles based on general popularity rather than your specific needs. Journify changes this by using techniques like **KNN** for subject classification, **Bayesian Search** for query optimization, and **HNSW-ANN** with **BERT** embeddings (via Weaviate) for fast and accurate recommendations. Additionally, **LLM + RAG** (Retriever-Augmented Generation) powers our Q&A chatbot, answering questions based on article content.
 
-Next day, I checked on Youtube and that option was already implemented, but since I don't use the platform that much I had not been aware of it.
+---
 
-Anyway, I wanted to test my idea, so I decided to build that system myself. As a proof of concept, instead of using the Youtube database, I will implement it using the MovieLens Dataset, that can be downloaded from Kaggle.
+## How Journify Works
 
-[-> Link to download dataset from Kaggle <-](https://www.kaggle.com/rounakbanik/the-movies-dataset?select=ratings.csv)
+- **K-Nearest Neighbors (KNN)** for categorizing articles by subject to ensure that you find exactly what you're looking for.
+- **Bayesian Search** for an intelligent querying experience, adapting results based on probability and relevance.
+- **HNSW-ANN and BERT embeddings** using Weaviate to enable high-accuracy article recommendations.
+- **LLM + RAG** for an interactive Q&A chatbot, which answers your queries about the recommended articles.
 
-**NOTE:** Yes, I know! If you visit the projects at Kaggle there are hundreds of repeated implementations of the same EDA processes and the same methods for recommendations using this dataset. THis project aims to be more unique and personalized using other methods and a web user interface using ["streamlit"](https://streamlit.io/)
+With these advanced techniques, Journify delivers tailored recommendations and insights to enhance your research journey.
 
-![App interface](/images/display.png "Display APP")
-
-(CURRENTLY IT WORKS LOCALLY, WORKING ON DEPLOYMENT)
-
-
-### About the dataset
-
->The dataset consists of movies released on or before July 2017. Data points include cast, crew, plot keywords, budget, revenue, posters, release dates, languages, production companies, countries, TMDB vote counts and vote averages.
->This dataset also has files containing 26 million ratings from 270,000 users for all 45,000 movies. Ratings are on a scale of 1-5 and have been obtained from the official GroupLens website.
-
+---
 
 ### Table of Contents
-**[Description](#description)**<br>
-**[Installation](#installation)**<br>
-**[Usage Instructions](#usage-instructions)**<br>
 
+- **[Installation](#installation)**
+- **[Usage Instructions](#usage-instructions)**
+- **[Dataset](#about-the-dataset)**
 
 ---
 
 ## Installation
 
+Journify requires several Python libraries, including Streamlit for the app interface, Weaviate for embedding-based recommendations, and SQLite3 for fast, efficient access to the article database. Install all necessary dependencies with the following command:
 
-Streamlit -> Display the app (working on deployment)  
-SQLite3 -> For easier and faster access to the database  
-BeautifulSoup -> Parsing data from the web  
+```bash
+pip install -r requirements.txt
+```
 
-````python
-pip install -r requirements.txt 
-pip3 install -r requirements.txt
-````
+Key Dependencies
+- Streamlit: Renders the web interface and allows interactive exploration.
+- Weaviate: Manages vector embeddings for advanced recommendation capabilities.
+- SQLite3: Provides a lightweight, fast-access database for article storage and retrieval.
+- BeautifulSoup: Useful for parsing data and scraping additional information if needed.
+
+
 ## Usage Instructions
-### Types of recommendations
+Types of Recommendations
+1. Content-based Recommendations: Journify uses metadata from arXiv articles (e.g., subjects, keywords, authors) to recommend similar articles based on the content of a particular item. If you're interested in a specific topic or author, Journify will suggest relevant papers tailored to that interest.
+Collaborative Filtering:
 
-![App interface Lord of the rings](/images/content_recom.png "Display APP movies similar to LoTR")
+2. For users who have provided feedback on articles, collaborative filtering predicts preferences by looking at ratings and preferences from other users with similar interests. This system identifies patterns in user behavior to provide more refined recommendations.
+Simple Recommenders:
 
-* **Content-based recommenders:** suggest similar items based on a particular item. This system uses item metadata, such as genre, director, description, actors, etc. for movies, to make these recommendations. The general idea behind these recommender systems is that if a person likes a particular item, he or she will also like an item that is similar to it. And to recommend that, it will make use of the user's past item metadata. A good example could be YouTube, where based on your history, it suggests you new videos that you could potentially watch.
+3. Sometimes, simplicity is best. Simple recommenders offer popular and trending articles across arXiv. Journify's simple recommender highlights articles that are frequently cited or widely read, making it easy for users to discover prominent papers in the field.
+Q&A Chatbot:
 
+4. Journify’s Q&A chatbot, powered by LLM + RAG, allows you to ask questions about specific research topics or articles. The chatbot uses Retriever-Augmented Generation to pull the most relevant information from articles, providing quick and informative answers.
 
-* **Collaborative filtering engines:** these systems are widely used, and they try to predict the rating or preference that a user would give an item-based on past ratings and preferences of other users. Collaborative filters do not require item metadata like its content-based counterparts.
+## About the Dataset
+The Journify platform is powered by the arXiv dataset, which contains comprehensive data about research articles, including:
 
+- Article Metadata: Information such as titles, authors, abstracts, subjects, keywords, and publication dates.
+- User Interaction Data: Feedback from users (e.g., ratings, likes) helps enhance collaborative filtering recommendations.
 
-* **Simple recommenders:** offer generalized recommendations to every user, based on movie popularity and/or genre. The basic idea behind this system is that movies that are more popular and critically acclaimed will have a higher probability of being liked by the average audience. An example could be IMDB Top 250.
+The arXiv dataset provides a rich source of data for generating recommendations, enabling Journify to bring you the latest and most relevant research articles from a wide array of scientific domains.
 
+# Getting Started with Journify
+- Start the Streamlit App:
 
-
+```bash
+streamlit run app.py
+```
+- Explore Articles: Use the sidebar to filter by topic, author, or other metadata. Journify will display articles based on your selected preferences and interests.
+- Chat with the Q&A Bot: Ask questions about a particular topic, and the chatbot will provide answers based on the content of arXiv articles.
 
