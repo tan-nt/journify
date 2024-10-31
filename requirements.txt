@@ -1,15 +1,8 @@
-# Web application development framework
+pandas
+requests
+numpy
 streamlit
-
-# Python packages
-numpy 
-
-# Computer Vision
-opencv-python==4.1.1.26
-
-# get data from URL
-pafy
-youtube-dl
-wget
-pipenv
-imutils
+beautifulsoup4
+pymysql
+scikit_learn
+tensorflow
