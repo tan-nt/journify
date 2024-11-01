@@ -60,7 +60,7 @@ def json_to_sqlite(json_file_path, sqlite_db_path, table_name='article', max_rea
 
 def init_data():
     if os.path.exists(json_file_path):
-        json_to_sqlite(json_file_path, sqlite_db_path, 'article', int(os.environ.get("ARTCILE_DATA_LINE") or "1000"))
+        json_to_sqlite(json_file_path, sqlite_db_path, 'article', int(os.environ.get("ARTCILE_DATA_LINE") or "100000"))
     else:
         print(f"JSON file not found at {json_file_path}.")
         
