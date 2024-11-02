@@ -1,6 +1,6 @@
 import streamlit as st
 from database.article import article_model as db_article
-from ai_model.recommendation import hybrid_recommendation_of_content_collaborative_filtering
+from ai_model.recommendation import hybrid_recommendation_of_content_collaborative_filtering, other_friends_recommend
 
 def display_article_recommendation():
     # Define a placeholder image URL for when no specific image is available
@@ -16,9 +16,7 @@ def display_article_recommendation():
     recommended_articles = hybrid_recommendation_of_content_collaborative_filtering(
         st.session_state["ip_address"],
         num_recommendations=5)
-    
-    print('recommended_articles=', len(recommended_articles))
-    
+
     col1, col2, col3 = st.columns(3)
     for idx, article in enumerate(recommended_articles):
         with (col1 if idx % 3 == 0 else col2 if idx % 3 == 1 else col3):
@@ -156,7 +154,9 @@ def display_article_recommendation():
 
     # Other Friends Recommend Section
     st.markdown("### 👥 Other Friends Recommend for You")
-    top_articles = db_article.get_top_article(10)
+    recommended_articles = other_friends_recommend(
+        st.session_state["ip_address"],
+        num_recommendations=5)
     col1, col2, col3 = st.columns(3)
 
     # Define enhanced CSS styles for the article card
@@ -239,7 +239,7 @@ def display_article_recommendation():
     """, unsafe_allow_html=True)
 
     # Loop through articles and display each one in a column
-    for idx, article in enumerate(top_articles):
+    for idx, article in enumerate(recommended_articles):
         with (col1 if idx % 3 == 0 else col2 if idx % 3 == 1 else col3):
             # Check if there's an image link available, otherwise use the default image
             image_url = article.get("image_link", default_image_url)
