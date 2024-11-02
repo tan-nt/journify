@@ -1,6 +1,6 @@
 import streamlit as st
 from database.article import article_model
-from database.user_logger import user_logger_model
+from database.user import user_model
 import pandas as pd
 import plotly.express as px
 
@@ -165,7 +165,7 @@ def display_article_analysis():
         st.plotly_chart(fig10, use_container_width=True)
         
 def display_user_logger_analysis():
-    data = user_logger_model.read_user_access()  # Load data into a DataFrame
+    data = user_model.read_user_access()  # Load data into a DataFrame
     df = pd.DataFrame(data)
     # Convert all object-type columns to string to ensure compatibility
     df = df.astype({col: "string" for col in df.select_dtypes(include="object").columns})

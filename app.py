@@ -10,7 +10,7 @@ from config.config import load_env_variables
 
 from database.json_to_sqlite import init_data
 from database.sqlite_to_csv import export_to_csv
-from database.user_logger import user_logger_model
+from database.user import user_model
 
 import streamlit as st
 from browser_detection import browser_detection_engine
@@ -40,7 +40,7 @@ def log_user_access():
     user_agent = value.get("userAgent")
     st.session_state["user_agent"] = user_agent
     print(f"IP Address: {ip_address}, User agent: {user_agent}")
-    user_logger_model.upsert_user_access(ip_address, user_agent)
+    user_model.upsert_user_access(ip_address, user_agent)
 
 if "logged" not in st.session_state:
     log_user_access()

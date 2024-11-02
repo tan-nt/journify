@@ -1,5 +1,6 @@
 import streamlit as st
-from ai_model import knn
+from ai_model import search
+from database.user_access_log import user_access_logger_model
 
 def display_home():
     col1, col2, col3 = st.columns(3)
@@ -71,7 +72,7 @@ def display_home():
         # Loading spinner while processing search results
         with st.spinner("Searching for articles..."):
             # Filter articles based on query
-            filtered_df = knn.filter_articles(query, knn.knn, knn.tfidf, knn.df)
+            filtered_df = search.filter_articles_knn(query, search.knn, search.tfidf, search.df)
         
         # Show number of results
         num_results = len(filtered_df)
@@ -91,4 +92,13 @@ def display_home():
             with st.expander("View all abstract"):
                 st.write(row['abstract'])  # Display full abstract
             
+            user_access_logger_model.log_action(
+                ip_address=st.session_state.get("ip_address"),
+                article_id=row.get("id"),
+                action_type="search",
+                title=row.get("title"),
+                abstract=row.get("abstract"),
+                influential_citation_count=row.get("influential_citation_count"),
+                search_query=row.get("query"),
+            )
             st.write("---")
