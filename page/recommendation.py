@@ -1,5 +1,5 @@
 import streamlit as st
-from database.article import article as db_article
+from database.article import article_model as db_article
 
 def display_article_recommendation():
     st.title("📚 Article Recommendations")
@@ -37,7 +37,7 @@ def display_article_recommendation():
             border-radius: 12px;
             overflow: hidden;
             margin: 10px 0;
-            height: 380px; /* Adjusted height for image inclusion */
+            height: 400px; /* Adjusted height for image inclusion */
             display: flex;
             flex-direction: column;
             background-color: #ffffff;

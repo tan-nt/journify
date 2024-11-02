@@ -2,7 +2,7 @@ import sqlite3
 
 class Article:
     def __init__(self):
-        self.db_path = "database/arxiv-metadata-oai-snapshot.db"
+        self.db_path = "database/article.db"
         self.table_name = "article"
         self._initialize_table()
 
@@ -112,4 +112,4 @@ class Article:
             else:
                 return []
 
-article = Article()
+article_model = Article()

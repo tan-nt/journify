@@ -1,6 +1,6 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
-from database.article import article
+from database.article import article_model
 import pandas as pd
 
 def preprocess_and_fit_knn(df, k=5):
@@ -40,4 +40,4 @@ def filter_articles(query, knn, tfidf, df):
     distances, indices = knn.kneighbors(query_vec)  # Get k nearest articles
     return df.iloc[indices[0]]  # Return filtered articles as a DataFrame
 
-knn, tfidf, df = preprocess_and_fit_knn(pd.DataFrame(article.read_articles()))
+knn, tfidf, df = preprocess_and_fit_knn(pd.DataFrame(article_model.read_articles()))

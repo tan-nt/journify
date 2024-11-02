@@ -3,8 +3,8 @@ import sqlite3
 import re, os
 from database.crawl_data import get_citation_count
 
-json_file_path = "database/arxiv-metadata-oai-snapshot.json"  # Replace with your JSON file path
-sqlite_db_path = "database/arxiv-metadata-oai-snapshot.db"    # Replace with your desired database path
+json_file_path = "database/article.json"  # Replace with your JSON file path
+sqlite_db_path = "database/article.db"    # Replace with your desired database path
 
 def clean_value(value):
     """Clean and normalize individual data values for SQLite."""

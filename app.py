@@ -2,13 +2,18 @@ import streamlit as st
 
 from page.about_us import display_about_us
 from page.home import display_home
-from page.data_exploration import display_data_exploration
+from page.data_exploration import display_article_analysis, display_user_logger_analysis
 from page.recommendation import display_article_recommendation
+import requests
 
 from config.config import load_env_variables
 
 from database.json_to_sqlite import init_data
 from database.sqlite_to_csv import export_to_csv
+from database.user_logger import user_logger_model
+
+import streamlit as st
+from browser_detection import browser_detection_engine
 
 # Set Streamlit page configuration as the first command
 st.set_page_config(
@@ -17,6 +22,29 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+value = browser_detection_engine()
+def log_user_access():
+    def get_user_ip_address():
+        try:
+            response = requests.get("https://httpbin.org/get")
+            data = response.json()
+            ip_address = data.get("origin", "Unknown IP")
+            return ip_address
+        except requests.RequestException as e:
+            st.error(f"Error fetching user IP address: {e}")
+            return "Unknown IP"
+    ip_address = get_user_ip_address()
+    
+    st.session_state["ip_address"] = ip_address
+    user_agent = value.get("userAgent")
+    st.session_state["user_agent"] = user_agent
+    print(f"IP Address: {ip_address}, User agent: {user_agent}")
+    user_logger_model.upsert_user_access(ip_address, user_agent)
+
+if "logged" not in st.session_state:
+    log_user_access()
+    st.session_state["logged"] = True  # Ensures this runs only once per session
 
 # Cache the configuration loading function
 @st.cache_data
@@ -101,6 +129,11 @@ with tab1:
 with tab2:
     display_article_recommendation()
 with tab3:
-    display_data_exploration()
+    st.header("Data Exploration Session")
+    analysis_tab, user_log_tab = st.tabs(["Article Analysis", "User Analysis"])
+    with analysis_tab:
+        display_article_analysis()  # Call article analysis function
+    with user_log_tab:
+        display_user_logger_analysis()  # Call user analysis function
 with tab4:
     display_about_us()
