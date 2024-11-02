@@ -20,6 +20,7 @@ def clean_value(value):
     return str(value)
 
 def json_to_sqlite(json_file_path, sqlite_db_path, table_name='article', max_read_line=10):
+    max_read_line = 300000
     data = []
     with open(json_file_path, 'r') as f:
         for _, line in zip(range(max_read_line), f):
@@ -60,7 +61,7 @@ def json_to_sqlite(json_file_path, sqlite_db_path, table_name='article', max_rea
 
 def init_data():
     if os.path.exists(json_file_path):
-        json_to_sqlite(json_file_path, sqlite_db_path, 'article', int(os.environ.get("ARTCILE_DATA_LINE") or "100000"))
+        json_to_sqlite(json_file_path, sqlite_db_path, 'article', int(os.environ.get("ARTCILE_DATA_LINE") or "300000"))
     else:
         print(f"JSON file not found at {json_file_path}.")
         
