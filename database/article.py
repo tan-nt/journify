@@ -13,7 +13,7 @@ class Article:
     def _initialize_table(self):
         """Initialize the article table with predefined columns if it doesn't exist."""
         columns = {
-            "id": "TEXT PRIMARY KEY",
+            "article_id": "TEXT PRIMARY KEY",
             "submitter": "TEXT",
             "authors": "TEXT",
             "title": "TEXT",

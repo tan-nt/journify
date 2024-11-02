@@ -79,10 +79,8 @@ def hybrid_recommendation_of_content_collaborative_filtering(user_id, num_recomm
         articles = article_model.read_articles()
         articles = pd.DataFrame(articles)
         
-        # Rename columns
-        articles = articles.rename(columns={'id': 'article_id'})
         user_access_logs = user_access_logs.rename(columns={'ip_address': 'user_id'})
-
+        
         # Get user history
         user_history = user_access_logs[user_access_logs['user_id'] == user_id]['article_id'].tolist()
         
@@ -99,7 +97,6 @@ def hybrid_recommendation_of_content_collaborative_filtering(user_id, num_recomm
         
         # Get article details for each recommendation
         recommended_articles = articles[articles['article_id'].isin(unique_recommendations)][['article_id', 'title', 'abstract']]
-        
         return recommended_articles.to_dict(orient='records')
     
     except Exception as e:
@@ -115,7 +112,6 @@ def other_friends_recommend(user_id, num_recommendations=5):
         articles = pd.DataFrame(articles)
         
         # Ensure user_access_logs and articles have the required columns
-        articles = articles.rename(columns={'id': 'article_id'})
         user_access_logs = user_access_logs.rename(columns={'ip_address': 'user_id'})
         friend_ids = user_model.read_random_ip_addresses()
         

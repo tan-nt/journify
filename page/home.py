@@ -2,7 +2,7 @@ import streamlit as st
 from ai_model import search
 from database.user_access_log import user_access_logger_model
 
-def display_home():
+def display_search():
     col1, col2, col3 = st.columns(3)
     with col1:
         st.write(' ')
@@ -94,7 +94,7 @@ def display_home():
             
             user_access_logger_model.log_action(
                 ip_address=st.session_state.get("ip_address"),
-                article_id=row.get("id"),
+                article_id=row.get("article_id"),
                 action_type="search",
                 title=row.get("title"),
                 abstract=row.get("abstract"),

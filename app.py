@@ -1,19 +1,26 @@
 import streamlit as st
-
 from page.about_us import display_about_us
-from page.home import display_home
+from page.home import display_search
 from page.data_exploration import display_article_analysis, display_user_logger_analysis
 from page.recommendation import display_article_recommendation
 import requests
-
+import streamlit as st
+from openai import OpenAI
+import logging
+import streamlit as st 
+from streamlit_float import *
 from config.config import load_env_variables
-
 from database.json_to_sqlite import init_data
 from database.sqlite_to_csv import export_to_csv
 from database.user import user_model
-
 import streamlit as st
 from browser_detection import browser_detection_engine
+from streamlit_option_menu import option_menu
+from page.chat import display_chat
+
+logger = logging.getLogger()
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+logging.basicConfig(encoding="UTF-8", level=logging.INFO)
 
 # Set Streamlit page configuration as the first command
 st.set_page_config(
@@ -54,11 +61,83 @@ def load_config():
     init_data()
     export_to_csv()
     return "Config loaded"
-
 # Call the cached load_config function
 config_status = load_config()
 
+st.markdown("""
+    <style>
+    .st-emotion-cache-1jicfl2, .st-emotion-cache-7tauuy {
+        padding: 0rem 2rem 10rem !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+def display_main_tabs():
+    tab1, tab2, tab3, tab4 = st.tabs(["Search", "Article Recommendation", "Data Exploration", "About Us"])
+    with tab1:
+        display_search()
+    with tab2:
+        display_article_recommendation()
+    with tab3:
+        st.header("Data Exploration Session")
+        analysis_tab, user_log_tab = st.tabs(["Article Analysis", "User Analysis"])
+        with analysis_tab:
+            display_article_analysis()  # Call article analysis function
+        with user_log_tab:
+            display_user_logger_analysis()  # Call user analysis function
+    with tab4:
+        display_about_us()
+
+# Initialize session state if not already set
+if "page" not in st.session_state:
+    st.session_state["page"] = "home"
+
 st.sidebar.image("resource/journify.png")
+st.sidebar.header("Navigation")
+# Create a stylish sidebar menu
+with st.sidebar:
+    selected = option_menu(
+        menu_title=None,  # Remove the redundant menu title
+        options=["🏠 Home", "💬 Go Chat"],
+        icons=["house", "chat-dots"],  # Optional icons
+        menu_icon="cast",  # Menu icon
+        default_index=0,  # Default selected option
+        styles={
+            "container": {"padding": "0!important", "background-color": "#f0f2f6"},
+            "nav-link": {
+                "font-size": "16px",
+                "text-align": "left",
+                "margin": "5px",
+                "--hover-color": "#eee",
+            },
+            "nav-link-selected": {"background-color": "#02ab21"},
+        },
+    )
+
+# Update session state based on the selected menu option
+if selected == "🏠 Home":
+    st.session_state["page"] = "home"
+elif selected == "💬 Go Chat":
+    st.session_state["page"] = "chat"
+
+# Display content based on the current page
+if st.session_state["page"] == "home":
+    st.title("Welcome to the Home Page!")
+    # Add your home page content here
+elif st.session_state["page"] == "chat":
+    st.title("Let's Chat!")
+    # Add your chat page content here
+
+# Sidebar navigation and page state
+if "page" not in st.session_state:
+    st.session_state.page = "home"  # Default to home page
+    
+# Render content based on the current page
+if st.session_state.page == "home":
+    display_main_tabs()
+elif st.session_state.page == "chat":
+    display_chat()
+
 st.sidebar.header("How to use Journify")
 st.sidebar.header("About")
 
@@ -122,18 +201,3 @@ with st.sidebar:
     """
     )
     
-# ------------------ Main App UI ------------------ #
-tab1, tab2, tab3, tab4 = st.tabs(["Home", "Article recommendation", "Data exploration", "About Us"])
-with tab1:
-    display_home()
-with tab2:
-    display_article_recommendation()
-with tab3:
-    st.header("Data Exploration Session")
-    analysis_tab, user_log_tab = st.tabs(["Article Analysis", "User Analysis"])
-    with analysis_tab:
-        display_article_analysis()  # Call article analysis function
-    with user_log_tab:
-        display_user_logger_analysis()  # Call user analysis function
-with tab4:
-    display_about_us()

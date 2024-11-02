@@ -184,8 +184,6 @@ def add_new_user(new_username, new_password):
 	cursor = connection.cursor(pymysql.cursors.DictCursor)
 	cursor.execute("""USE movies_DB""")
 	try:
-		print(new_username)
-		print(new_password)
 		cursor.execute("""
 		INSERT INTO users(username, password) VALUES (%s, %s)
 		""", (new_username, new_password))

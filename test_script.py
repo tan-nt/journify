@@ -6,12 +6,9 @@ def get_citation_count(arxiv_id):
 
     # Send a GET request to the API
     response = requests.get(url)
-    print('response=', response)
-
     # Check if the request was successful
     if response.status_code == 200:
         data = response.json()
-        print('data=', data)
         citation_count = data.get('influentialCitationCount', 0)
         return citation_count
     else:

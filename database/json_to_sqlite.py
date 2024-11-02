@@ -2,8 +2,9 @@ import json
 import sqlite3
 import re, os
 from database.crawl_data import get_citation_count
+from pathlib import Path
 
-json_file_path = "database/article.json"  # Replace with your JSON file path
+json_file_path = "database/arxiv-metadata-oai-snapshot.json"  # Replace with your JSON file path
 sqlite_db_path = "database/article.db"    # Replace with your desired database path
 
 def clean_value(value):
@@ -24,12 +25,14 @@ def json_to_sqlite(json_file_path, sqlite_db_path, table_name='article', max_rea
     max_read_line = 100
     data = []
     with open(json_file_path, 'r') as f:
-        for _, line in zip(range(max_read_line), f):
+        for i, line in zip(range(max_read_line), f):
             record = json.loads(line.strip())
-            if record.get("id"):
-                cite_count = get_citation_count(record.get("id"))
-                print(f"id={record.get('id')}, crawl influential_citation_count={cite_count}")
+            record["article_id"] = record.get("id")
+            if record.get("article_id"):
+                cite_count = get_citation_count(record.get("article_id"))
                 record["influential_citation_count"] = cite_count
+            print(f"loaded article, progress={i}/{max_read_line}")
+                
             # Clean and serialize each field
             cleaned_record = {key: clean_value(value) for key, value in record.items()}
             data.append(cleaned_record)
@@ -65,7 +68,8 @@ def json_to_sqlite(json_file_path, sqlite_db_path, table_name='article', max_rea
     print(f"JSON data has been successfully converted to SQLite database. {len(data)} rows inserted.")
 
 def init_data():
-    if os.path.exists(json_file_path) and not os.path.exists(sqlite_db_path):
+    # if os.path.exists(json_file_path) and not Path(sqlite_db_path).is_file():
+    if os.path.exists(json_file_path) and not Path(sqlite_db_path).is_file():
         json_to_sqlite(json_file_path, sqlite_db_path, 'article', int(os.environ.get("ARTCILE_DATA_LINE") or "1000"))
     else:
         print(f"JSON file not found at {json_file_path}.")

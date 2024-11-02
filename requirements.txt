@@ -7,3 +7,8 @@ tensorflow
 python-dotenv
 plotly
 streamlit-browser-engine
+openai
+extra_streamlit_components
+streamlit-float
+tiktoken
+streamlit-option-menu
