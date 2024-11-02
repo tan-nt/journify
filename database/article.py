@@ -26,6 +26,7 @@ class Article:
             "abstract": "TEXT",
             "versions": "TEXT",
             "update_date": "TEXT",
+            "influential_citation_count": "TEXT",
             "authors_parsed": "TEXT"
         }
 
@@ -92,5 +93,23 @@ class Article:
             cursor = conn.cursor()
             cursor.execute(f"DELETE FROM {self.table_name} WHERE {condition}")
             conn.commit()
+            
+    def get_top_article(self, limit=10):
+        """Fetch the article with the highest influential_citation_count."""
+        with self._connect() as conn:
+            cursor = conn.cursor()
+            query = f"""
+            SELECT * FROM {self.table_name}
+            ORDER BY CAST(influential_citation_count AS INTEGER) DESC
+            LIMIT {limit}
+            """
+            cursor.execute(query)
+            results = cursor.fetchone()
+            if results:
+                results = cursor.fetchall()
+                column_names = [description[0] for description in cursor.description]
+                return [dict(zip(column_names, row)) for row in results]
+            else:
+                return []
 
 article = Article()

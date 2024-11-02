@@ -1,22 +1,26 @@
 import requests
-from bs4 import BeautifulSoup
 
-def get_arxiv_category_mapping():
-    url = "https://arxiv.org/category_taxonomy"
+def get_citation_count(arxiv_id):
+    # Construct the Semantic Scholar API URL
+    url = f'https://api.semanticscholar.org/v1/paper/arXiv:{arxiv_id}'
+
+    # Send a GET request to the API
     response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    print('soup:', soup)
+    print('response=', response)
 
-    category_mapping = {}
+    # Check if the request was successful
+    if response.status_code == 200:
+        data = response.json()
+        print('data=', data)
+        citation_count = data.get('influentialCitationCount', 0)
+        return citation_count
+    else:
+        print(f"Error: Unable to fetch data (Status code: {response.status_code})")
+        return None
 
-    # Find all category elements on the page
-    for category in soup.find_all("span", class_="category-name"):
-        abbreviation = category.find("code").text.strip()  # Category abbreviation
-        full_name = category.find("strong").text.strip()   # Full name
-        category_mapping[abbreviation] = full_name
-
-    return category_mapping
-
-# Fetch the mapping
-category_mapping = get_arxiv_category_mapping()
-print(category_mapping)  # Print or save the dictionary as needed
+# Example usage
+# arxiv_id = '0704.0001'
+arxiv_id = '1706.03762'
+citation_count = get_citation_count(arxiv_id)
+if citation_count is not None:
+    print(f"The paper with arXiv ID {arxiv_id} has been cited {citation_count} times.")

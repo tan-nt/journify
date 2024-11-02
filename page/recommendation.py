@@ -1,4 +1,5 @@
 import streamlit as st
+from database.article import article as db_article
 
 def display_article_recommendation():
     st.title("📚 Article Recommendations")
@@ -22,19 +23,91 @@ def display_article_recommendation():
 
     # Top/Popular Articles Section
     st.markdown("### 🔥 Top/Popular Articles")
-    top_articles = [
-        {"title": "Understanding Artificial Intelligence", "abstract": "An overview of AI and its applications in modern technology.", "url": "#"},
-        {"title": "Top Data Science Tools for 2024", "abstract": "Discover the best tools and software for data scientists this year.", "url": "#"},
-        {"title": "The Evolution of Machine Learning", "abstract": "Tracing the journey of ML from its beginnings to the present.", "url": "#"}
-    ]
-
+    # top_articles = [
+    #     {"title": "Understanding Artificial Intelligence", "abstract": "An overview of AI and its applications in modern technology.", "url": "#"},
+    #     {"title": "Top Data Science Tools for 2024", "abstract": "Discover the best tools and software for data scientists this year.", "url": "#"},
+    #     {"title": "The Evolution of Machine Learning", "abstract": "Tracing the journey of ML from its beginnings to the present.", "url": "#"}
+    # ]
+    
+    # Fetch top articles (assume `db_article.get_top_article(10)` is already defined and works as expected)
+    top_articles = db_article.get_top_article(10)
+        
+    # Streamlit layout
+    st.markdown("<h2 style='text-align: center;'>🔥 Top/Popular Articles</h2>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns(3)
 
+    # Define CSS style for a more refined "Read more" button and article layout
+    st.markdown("""
+        <style>
+        .article-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 5px 0;
+            height: 250px; /* Fixed height for uniform layout */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #fafafa;
+        }
+        .article-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a73e8;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+        }
+        .article-abstract {
+            font-size: 14px;
+            color: #333;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Limits abstract to 2 lines */
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            margin-top: 5px;
+        }
+        .read-more {
+            display: inline-block;
+            padding: 5px 12px;
+            font-size: 13px;
+            color: #555;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            margin-top: auto;
+        }
+        .read-more:hover {
+            background-color: #eee;
+            color: #333;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # Loop through articles and display each one in a column
     for idx, article in enumerate(top_articles):
         with (col1 if idx % 3 == 0 else col2 if idx % 3 == 1 else col3):
-            st.markdown(f"#### [{article['title']}]({article['url']})")
-            st.write(article["abstract"])
-            st.button("Read more", key=f"top_read_more_{idx}")
+            st.markdown(f"""
+                <div class="article-card">
+                    <div class="article-title">
+                        <a href="https://arxiv.org/abs/{article.get("id")}" target="_blank">
+                            {article['title']}
+                        </a>
+                    </div>
+                    <div style="font-size: 12px; color: #888; margin-top: 5px;">Cited by: {article.get("influential_citation_count")}</div>
+                    <div class="article-abstract">
+                        {article['abstract']}
+                    </div>
+                    <a href="https://arxiv.org/abs/{article.get("id")}" target="_blank" class="read-more">Read more</a>
+                </div>
+            """, unsafe_allow_html=True)
 
     # Other Friends Recommend Section
     st.markdown("### 👥 Other Friends Recommend for You")
