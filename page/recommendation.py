@@ -23,17 +23,10 @@ def display_article_recommendation():
 
     # Top/Popular Articles Section
     st.markdown("### 🔥 Top/Popular Articles")
-    # top_articles = [
-    #     {"title": "Understanding Artificial Intelligence", "abstract": "An overview of AI and its applications in modern technology.", "url": "#"},
-    #     {"title": "Top Data Science Tools for 2024", "abstract": "Discover the best tools and software for data scientists this year.", "url": "#"},
-    #     {"title": "The Evolution of Machine Learning", "abstract": "Tracing the journey of ML from its beginnings to the present.", "url": "#"}
-    # ]
-    
-    # Fetch top articles (assume `db_article.get_top_article(10)` is already defined and works as expected)
     top_articles = db_article.get_top_article(10)
         
     # Streamlit layout
-    st.markdown("<h2 style='text-align: center;'>🔥 Top/Popular Articles</h2>", unsafe_allow_html=True)
+    # st.markdown("<h2 style='text-align: center;'>🔥 Top/Popular Articles</h2>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns(3)
 
     # Define CSS style for a more refined "Read more" button and article layout
