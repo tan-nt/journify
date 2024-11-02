@@ -16,7 +16,6 @@ class User:
         user_columns = {
             "ip_address": "TEXT PRIMARY KEY",
             "access_time": "TEXT",
-            "accessed_article_id": "TEXT",
             "user_agent": "TEXT"  # For additional info like browser and OS
         }
         with self._connect() as conn:
