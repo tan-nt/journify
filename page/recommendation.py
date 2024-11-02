@@ -14,7 +14,7 @@ def display_article_recommendation():
     st.markdown("### 🎯 Recommended Articles for You")
 
     recommended_articles = hybrid_recommendation_of_content_collaborative_filtering(
-        st.session_state["ip_address"],
+        st.session_state.get("ip_address") or "",
         num_recommendations=5)
 
     col1, col2, col3 = st.columns(3)
