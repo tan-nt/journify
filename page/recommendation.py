@@ -21,32 +21,49 @@ def display_article_recommendation():
             st.write(article["abstract"])
             st.button("Read more", key=f"rec_read_more_{idx}")
 
-    # Top/Popular Articles Section
-    st.markdown("### 🔥 Top/Popular Articles")
+    # Fetch top articles (assuming db_article.get_top_article(10) is defined and working)
     top_articles = db_article.get_top_article(10)
-        
+
     # Streamlit layout
-    # st.markdown("<h2 style='text-align: center;'>🔥 Top/Popular Articles</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center;'>🔥 Top/Popular Articles</h2>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns(3)
 
-    # Define CSS style for a more refined "Read more" button and article layout
+    # Define enhanced CSS styles for the article card
     st.markdown("""
         <style>
         .article-card {
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 5px 0;
-            height: 250px; /* Fixed height for uniform layout */
+            position: relative;
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 10px 0;
+            height: 380px; /* Adjusted height for image inclusion */
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            background-color: #fafafa;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .article-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .article-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
         .article-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #1a73e8;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
             overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -55,50 +72,67 @@ def display_article_recommendation():
         }
         .article-abstract {
             font-size: 14px;
-            color: #333;
+            color: #555;
             overflow: hidden;
             display: -webkit-box;
-            -webkit-line-clamp: 2; /* Limits abstract to 2 lines */
+            -webkit-line-clamp: 3; /* Limits abstract to 3 lines */
             -webkit-box-orient: vertical;
             text-overflow: ellipsis;
-            margin-top: 5px;
+            flex-grow: 1;
+        }
+        .article-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .cited-count {
+            font-size: 12px;
+            color: #888;
         }
         .read-more {
-            display: inline-block;
-            padding: 5px 12px;
+            padding: 6px 12px;
             font-size: 13px;
-            color: #555;
+            color: #333;
             border: 1px solid #ccc;
             border-radius: 6px;
-            text-align: center;
             text-decoration: none;
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-            margin-top: auto;
+            transition: border-color 0.3s ease, color 0.3s ease;
         }
         .read-more:hover {
-            background-color: #eee;
-            color: #333;
-            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            border-color: red;
+            color: red;
         }
         </style>
     """, unsafe_allow_html=True)
 
+    # Define a placeholder image URL for when no specific image is available
+    # default_image_url = "https://via.placeholder.com/800x600?text=No+Image+Available"
+    default_image_url = "https://librarylearningspace.com/wp-content/uploads/2022/05/arxiv-logo-1.png"
+
     # Loop through articles and display each one in a column
     for idx, article in enumerate(top_articles):
         with (col1 if idx % 3 == 0 else col2 if idx % 3 == 1 else col3):
+            # Check if there's an image link available, otherwise use the default image
+            image_url = article.get("image_link", default_image_url)
             st.markdown(f"""
                 <div class="article-card">
-                    <div class="article-title">
-                        <a href="https://arxiv.org/abs/{article.get("id")}" target="_blank">
-                            {article['title']}
-                        </a>
+                    <img src="{image_url}" alt="Article Image" class="article-image">
+                    <div class="article-content">
+                        <div class="article-title">
+                            <a href="https://arxiv.org/abs/{article.get("id")}" target="_blank" style="text-decoration: none; color: inherit;">
+                                {article['title']}
+                            </a>
+                        </div>
+                        <div class="article-abstract">
+                            {article['abstract']}
+                        </div>
+                        <div class="article-footer">
+                            <div class="cited-count">Cited by: {article.get("influential_citation_count", "N/A")}</div>
+                            <a href="https://arxiv.org/abs/{article.get("id")}" target="_blank" class="read-more">Read more</a>
+                        </div>
                     </div>
-                    <div style="font-size: 12px; color: #888; margin-top: 5px;">Cited by: {article.get("influential_citation_count")}</div>
-                    <div class="article-abstract">
-                        {article['abstract']}
-                    </div>
-                    <a href="https://arxiv.org/abs/{article.get("id")}" target="_blank" class="read-more">Read more</a>
                 </div>
             """, unsafe_allow_html=True)
 
