@@ -6,4 +6,4 @@ scikit_learn
 tensorflow
 python-dotenv
 plotly
-browser_detection_engine
+streamlit-browser-engine
