@@ -1,8 +1,12 @@
 import streamlit as st
+
 from page.about_us import display_about_us
 from page.home import display_home
 from page.data_exploration import display_data_exploration
+from page.recommendation import display_article_recommendation
+
 from config.config import load_env_variables
+
 from database.json_to_sqlite import init_data
 from database.sqlite_to_csv import export_to_csv
 
@@ -28,7 +32,6 @@ config_status = load_config()
 
 st.sidebar.image("resource/journify.png")
 st.sidebar.header("How to use Journify")
-
 st.sidebar.header("About")
 
 with st.sidebar:
@@ -95,6 +98,8 @@ with st.sidebar:
 tab1, tab2, tab3, tab4 = st.tabs(["Home", "Article recommendation", "Data exploration", "About Us"])
 with tab1:
     display_home()
+with tab2:
+    display_article_recommendation()
 with tab3:
     display_data_exploration()
 with tab4:
