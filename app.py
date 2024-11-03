@@ -16,7 +16,7 @@ from database.user import user_model
 import streamlit as st
 from browser_detection import browser_detection_engine
 from streamlit_option_menu import option_menu
-from page.chat import display_chat
+from ai_model.chat import display_chat
 
 logger = logging.getLogger()
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])

@@ -75,7 +75,7 @@ def display_chat():
         del st.session_state["uploaded_pic"]
     # Model Choice - Name to be adapted to your deployment
     if "openai_model" not in st.session_state:
-        st.session_state["openai_model"] = "gpt-3.5-turbo"
+        st.session_state["openai_model"] = "gpt-4-turbo"
     # Adapted from https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps
     if "messages" not in st.session_state:
         st.session_state["messages"] = []

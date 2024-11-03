@@ -84,8 +84,6 @@ def gravity(U, V):
   return 1. / (U.shape[0].value*V.shape[0].value) * tf.reduce_sum(
       tf.matmul(U, U, transpose_a=True) * tf.matmul(V, V, transpose_a=True))
 
-
-
 def build_regularized_model(
     ratings, user_id_dict, tot_users, tot_movies, embedding_dim=3, regularization_coeff=.1, gravity_coeff=1.,
     init_stddev=0.1):

@@ -68,7 +68,7 @@ def json_to_sqlite(json_file_path, sqlite_db_path, table_name='article', max_rea
     print(f"JSON data has been successfully converted to SQLite database. {len(data)} rows inserted.")
 
 def init_data():
-    # if os.path.exists(json_file_path) and not Path(sqlite_db_path).is_file():
+    # if os.path.exists(json_file_path):
     if os.path.exists(json_file_path) and not Path(sqlite_db_path).is_file():
         json_to_sqlite(json_file_path, sqlite_db_path, 'article', int(os.environ.get("ARTCILE_DATA_LINE") or "1000"))
     else:
