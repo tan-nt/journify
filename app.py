@@ -1,7 +1,7 @@
 import streamlit as st
 from page.about_us import display_about_us
 from page.home import display_search
-from page.data_exploration import display_article_analysis, display_user_logger_analysis
+from page.data_exploration import display_article_analysis, display_user_logger_analysis, display_sentiment_analysis
 from page.recommendation import display_article_recommendation
 import requests
 import streamlit as st
@@ -81,11 +81,13 @@ def display_main_tabs():
         display_article_recommendation()
     with tab3:
         st.header("Data Exploration Session")
-        analysis_tab, user_log_tab = st.tabs(["Article Analysis", "User Analysis"])
+        analysis_tab, user_log_tab, sentiment_analysis_tab = st.tabs(["Article Analysis", "User Analysis", "Sentiment analysis"])
         with analysis_tab:
             display_article_analysis()  # Call article analysis function
         with user_log_tab:
             display_user_logger_analysis()  # Call user analysis function
+        with sentiment_analysis_tab:
+            display_sentiment_analysis()  # Call user analysis function
     with tab4:
         display_about_us()
 
@@ -99,8 +101,10 @@ st.sidebar.header("Navigation")
 with st.sidebar:
     selected = option_menu(
         menu_title=None,  # Remove the redundant menu title
-        options=["🏠 Home", "💬 Go Chat", "🔮 Prediction", "🤖 AI Model Exploration"],
-        icons=["house", "chat-dots", "graph-up", "robot"],  # Optional icons for each menu item
+        # options=["🏠 Home", "💬 Go Chat", "🔮 Prediction", "🤖 AI Model Exploration"],
+        # icons=["house", "chat-dots", "graph-up", "robot"],  # Optional icons for each menu item
+        options=["🏠 Home", "💬 Go Chat", "🔮 Prediction"],
+        icons=["house", "chat-dots", "graph-up"],  # Optional icons for each menu item
         menu_icon="cast",  # Icon for the menu itself
         default_index=0,  # Default selected option
         styles={
@@ -122,8 +126,8 @@ elif selected == "💬 Go Chat":
     st.session_state["page"] = "chat"
 elif selected == "🔮 Prediction":
     st.session_state["page"] = "prediction"
-elif selected == "🤖 AI Model Exploration":
-    st.session_state["page"] = "ai-exploration"
+# elif selected == "🤖 AI Model Exploration":
+#     st.session_state["page"] = "ai-exploration"
 
 
 # Display content based on the current page
@@ -135,8 +139,6 @@ elif st.session_state["page"] == "chat":
     # Add your chat page content here
 elif st.session_state["page"] == "prediction":
     st.title("Go to predict trends!")
-elif st.session_state["page"] == "ai-exploration":
-    st.title("Behind the scene you play!")
 
 # Sidebar navigation and page state
 if "page" not in st.session_state:
@@ -149,8 +151,6 @@ elif st.session_state.page == "chat":
     display_chat()
 elif st.session_state.page == "prediction":
     display_prediction()
-elif st.session_state.page == "ai-exploration":
-    display_chat()
 
 st.sidebar.header("How to use Journify")
 st.sidebar.header("About")

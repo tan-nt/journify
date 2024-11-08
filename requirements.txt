@@ -12,3 +12,7 @@ extra_streamlit_components
 streamlit-float
 tiktoken
 streamlit-option-menu
+tweepy
+nltk
+seaborn
+wordcloud
