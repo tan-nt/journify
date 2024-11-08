@@ -100,9 +100,10 @@ def display_search():
             comments = get_comments(row['article_id'])  # Replace this with your actual comments retrieval method
             if comments:
                 for comment in comments:
-                    # HTML structure for each comment
+                    # HTML structure for each comment with sentiment
+                    sentiment_color = sentiment_colors.get(comment['sentiment'], "#808080")
                     st.markdown(f"""
-                    <div style="display: flex; align-items: start; margin-bottom: 15px;">
+                    <div style="display: flex; align-items: start; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
                         <div style="background-color: #333; color: white; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.2em; margin-right: 10px;">
                             {comment['username'][0].upper()}
                         </div>
@@ -111,8 +112,9 @@ def display_search():
                             <p style="color: #555; font-size: 0.9em; margin: 0;">{comment['date']}</p>
                             <p style="font-size: 1em; margin: 5px 0;">{comment['text']}</p>
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                <button style="background: none; border: none; color: #888; cursor: pointer;">👍 {comment.get('likes') or "0"}</button>
-                                <button style="background: none; border: none; color: #888; cursor: pointer;">👎</button>
+                                <span style="background-color: {sentiment_color}; color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.8em; font-weight: bold;">{comment['sentiment']}</span>
+                                <button style="background: none; border: none; color: #888; cursor: pointer;">👍 {comment.get('likes', 0)}</button>
+                                <button style="background: none; border: none; color: #888; cursor: pointer;">👎 {comment.get('dislikes', 0)}</button>
                                 <button style="background: none; border: none; color: #888; cursor: pointer;">Reply</button>
                             </div>
                         </div>
@@ -133,29 +135,63 @@ def display_search():
             st.write("---")
 
 
+# Predefined comments categorized by sentiment
+predefined_comments = {
+    "Positive": [
+        "This article was very insightful!",
+        "Great research, thanks for sharing!",
+        "Helpful for my own studies, thanks!",
+        "Impressive work! Learned a lot from this article.",
+        "The findings are extremely valuable. Well done!"
+    ],
+    "Neutral": [
+        "Interesting approach, but needs more clarity.",
+        "This research has potential, but I need more details.",
+        "Good article, but I'm not entirely convinced.",
+        "Some points are valid, but others require more evidence.",
+        "It's okay, but I expected more depth."
+    ],
+    "Negative": [
+        "I found the methodology a bit unclear.",
+        "This article lacks substantial evidence.",
+        "Not very informative.",
+        "I disagree with the conclusions drawn.",
+        "The article did not meet my expectations."
+    ]
+}
 
+# Function to retrieve comments with predefined sentiment based on the comment text
 def get_comments(article_id):
     # Generate a random number of comments for demonstration
     num_comments = random.randint(0, 5)
     comments = []
-
+    
     for _ in range(num_comments):
-        # Fake usernames and comments
+        # Randomly assign sentiment
+        sentiment = random.choice(["Positive", "Neutral", "Negative"])
+        
+        # Select a comment text based on the sentiment
+        text = random.choice(predefined_comments[sentiment])
+        
+        # Generate random username and other details
         username = random.choice(["user123", "researcherA", "student98", "prof_smith", "analyst007"])
-        text = random.choice([
-            "This article was very insightful!",
-            "I found the methodology a bit unclear.",
-            "Great research, thanks for sharing!",
-            "Interesting take, but could use more data.",
-            "Helpful for my own studies, thanks!"
-        ])
         date = datetime.now() - timedelta(days=random.randint(1, 30))  # Random date within the past month
+        likes = random.randint(0, 100)
+        
         comments.append({
             "username": username,
             "text": text,
             "date": date.strftime("%Y-%m-%d"),
-            
-            "likes": random.randint(0, 100)
+            "sentiment": sentiment,
+            "likes": likes,
+            "dislikes": random.randint(0, 20)
         })
     
     return comments
+
+# Sentiment color mapping
+sentiment_colors = {
+    "Positive": "#4CAF50",  # Green
+    "Neutral": "#FF9800",   # Orange
+    "Negative": "#F44336"   # Red
+}
