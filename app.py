@@ -4,7 +4,7 @@ from page.about_us import display_about_us
 from page.search import display_search
 from page.data_exploration import display_article_analysis, display_user_logger_analysis
 from page.recommendation import display_article_recommendation
-from pages.home_page import display_home_page
+from pages.home import display_home
 import requests
 import streamlit as st
 from openai import OpenAI
