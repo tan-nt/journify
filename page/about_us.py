@@ -23,10 +23,10 @@ def display_about_us():
         },
         {
             "name": "Trần Quốc Thái",
-            "role": "Data Developer",
+            "role": "Application Developer",
             "id": "2370759",
             "email": "mailto:tqthai.sdh232@hcmut.edu.vn",
-            "contribution": "Engineered scalable data infrastructure, ensuring reliable performance and seamless data processing."
+            "contribution": "Designed and implemented high-performance application architecture, and optimized system efficiency."
         },
         {
             "name": "Trần Vũ Hồng Thiên",
