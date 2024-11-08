@@ -66,6 +66,7 @@ The Journify platform is powered by the arXiv dataset, which contains comprehens
 
 - Article Metadata: Information such as titles, authors, abstracts, subjects, keywords, and publication dates.
 - User Interaction Data: Feedback from users (e.g., ratings, likes) helps enhance collaborative filtering recommendations.
+- Financial phrasebank: https://huggingface.co/datasets/takala/financial_phrasebank
 
 The arXiv dataset provides a rich source of data for generating recommendations, enabling Journify to bring you the latest and most relevant research articles from a wide array of scientific domains.
 

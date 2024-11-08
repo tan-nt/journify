@@ -17,6 +17,7 @@ import streamlit as st
 from browser_detection import browser_detection_engine
 from streamlit_option_menu import option_menu
 from ai_model.chat import display_chat
+from ai_model.prediction import display_prediction
 
 logger = logging.getLogger()
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -98,9 +99,9 @@ st.sidebar.header("Navigation")
 with st.sidebar:
     selected = option_menu(
         menu_title=None,  # Remove the redundant menu title
-        options=["🏠 Home", "💬 Go Chat"],
-        icons=["house", "chat-dots"],  # Optional icons
-        menu_icon="cast",  # Menu icon
+        options=["🏠 Home", "💬 Go Chat", "🔮 Prediction", "🤖 AI Model Exploration"],
+        icons=["house", "chat-dots", "graph-up", "robot"],  # Optional icons for each menu item
+        menu_icon="cast",  # Icon for the menu itself
         default_index=0,  # Default selected option
         styles={
             "container": {"padding": "0!important", "background-color": "#f0f2f6"},
@@ -119,6 +120,11 @@ if selected == "🏠 Home":
     st.session_state["page"] = "home"
 elif selected == "💬 Go Chat":
     st.session_state["page"] = "chat"
+elif selected == "🔮 Prediction":
+    st.session_state["page"] = "prediction"
+elif selected == "🤖 AI Model Exploration":
+    st.session_state["page"] = "ai-exploration"
+
 
 # Display content based on the current page
 if st.session_state["page"] == "home":
@@ -127,6 +133,10 @@ if st.session_state["page"] == "home":
 elif st.session_state["page"] == "chat":
     st.title("Let's Chat!")
     # Add your chat page content here
+elif st.session_state["page"] == "prediction":
+    st.title("Go to predict trends!")
+elif st.session_state["page"] == "ai-exploration":
+    st.title("Behind the scene you play!")
 
 # Sidebar navigation and page state
 if "page" not in st.session_state:
@@ -136,6 +146,10 @@ if "page" not in st.session_state:
 if st.session_state.page == "home":
     display_main_tabs()
 elif st.session_state.page == "chat":
+    display_chat()
+elif st.session_state.page == "prediction":
+    display_prediction()
+elif st.session_state.page == "ai-exploration":
     display_chat()
 
 st.sidebar.header("How to use Journify")
