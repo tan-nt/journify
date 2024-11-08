@@ -453,37 +453,37 @@ def display_sentiment_analysis():
         st.pyplot(plt)
 
     # Generate word clouds for each sentiment category
-    wordcount_gen(df, 'Positive')
-    wordcount_gen(df, 'Negative')
-    wordcount_gen(df, 'Neutral')
+    # wordcount_gen(df, 'Positive')
+    # wordcount_gen(df, 'Negative')
+    # wordcount_gen(df, 'Neutral')
 
-    # Apply data processing to each tweet
-    st.header("Data Preprocessing and Encoding")
-    X = list(map(tweet_to_words, df['clean_text']))
+    # # Apply data processing to each tweet
+    # st.header("Data Preprocessing and Encoding")
+    # X = list(map(tweet_to_words, df['clean_text']))
 
-    # Encode target labels
-    st.write("Encoding Target Labels")
-    le = LabelEncoder()
-    Y = le.fit_transform(df['category'])
-    st.write("Encoded labels:", le.classes_)
+    # # Encode target labels
+    # st.write("Encoding Target Labels")
+    # le = LabelEncoder()
+    # Y = le.fit_transform(df['category'])
+    # st.write("Encoded labels:", le.classes_)
 
-    # Split dataset into training, testing, and validation sets
-    y = pd.get_dummies(df['category'])
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
-    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.25, random_state=1)
-    st.write(f"Training set size: {len(X_train)}, Validation set size: {len(X_val)}, Test set size: {len(X_test)}")
+    # # Split dataset into training, testing, and validation sets
+    # y = pd.get_dummies(df['category'])
+    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+    # X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.25, random_state=1)
+    # st.write(f"Training set size: {len(X_train)}, Validation set size: {len(X_val)}, Test set size: {len(X_test)}")
 
-    # Vectorize text data
-    st.header("Text Vectorization using Count Vectorizer")
-    vocabulary_size = 5000
-    count_vector = CountVectorizer(max_features=vocabulary_size, preprocessor=lambda x: x, tokenizer=lambda x: x)
+    # # Vectorize text data
+    # st.header("Text Vectorization using Count Vectorizer")
+    # vocabulary_size = 5000
+    # count_vector = CountVectorizer(max_features=vocabulary_size, preprocessor=lambda x: x, tokenizer=lambda x: x)
 
-    # Fit the training data
-    X_train = count_vector.fit_transform(X_train).toarray()
-    X_test = count_vector.transform(X_test).toarray()
+    # # Fit the training data
+    # X_train = count_vector.fit_transform(X_train).toarray()
+    # X_test = count_vector.transform(X_test).toarray()
 
-    st.write("Count Vectorization Complete. First 5 Feature Vectors from Training Data:")
-    st.write(X_train[:5])
+    # st.write("Count Vectorization Complete. First 5 Feature Vectors from Training Data:")
+    # st.write(X_train[:5])
 
         
 
