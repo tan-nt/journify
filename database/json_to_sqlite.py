@@ -22,7 +22,7 @@ def clean_value(value):
     return str(value)
 
 def json_to_sqlite(json_file_path, sqlite_db_path, table_name='article', max_read_line=10):
-    max_read_line = 100
+    max_read_line = 1000
     data = []
     with open(json_file_path, 'r') as f:
         for i, line in zip(range(max_read_line), f):

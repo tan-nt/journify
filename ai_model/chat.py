@@ -55,21 +55,6 @@ def display_chat():
         if picture:
             st.session_state["uploaded_pic"] = True
             st.rerun()
-    def get_conversation_title():
-        full_text = "".join([item["content"] for item in st.session_state["messages"]])
-        response = client.chat.completions.create(
-            model=st.session_state["openai_model"],
-            messages=[
-                {
-                    "role": "user",
-                    "content": "Summarize the following conversation in 3 words:"
-                    + full_text,
-                },
-            ],
-            stop=None,
-        )
-        conversation_title = response.choices[0].message.content
-        return conversation_title
     if "uploaded_pic" in st.session_state and st.session_state["uploaded_pic"]:
         st.toast("Picture uploaded!", icon="📥")
         del st.session_state["uploaded_pic"]
@@ -97,7 +82,6 @@ def display_chat():
     # If the prompt is initialized or if the user is asking for a rerun, we
     # launch the chat completion by the LLM
     if prompt or ("rerun" in st.session_state and st.session_state["rerun"]):
-        print('promt=', prompt)
         with st.chat_message("assistant", avatar=assistant_avatar):
             stream = client.chat.completions.create(
                 model=st.session_state["openai_model"],
@@ -186,6 +170,3 @@ def display_chat():
                     time.sleep(1)
                 st.write("")
                 st.session_state["disclaimer"] = True
-    if "conversation_id" in st.session_state:
-        conversation_title = get_conversation_title()
-        cookie_manager.set(st.session_state["conversation_id"], val={conversation_title: st.session_state["messages"]})
