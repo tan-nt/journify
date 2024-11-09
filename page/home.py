@@ -3,8 +3,7 @@ from ai_model import search
 from database.user_access_log import user_access_logger_model
 import random
 from datetime import datetime, timedelta
-
-
+import pandas as pd
 
 def display_search():
     col1, col2, col3 = st.columns(3)
@@ -76,7 +75,12 @@ def display_search():
         # Loading spinner while processing search results
         with st.spinner("Searching for articles..."):
             # Filter articles based on query
-            filtered_df = search.filter_articles_knn(query, search.knn, search.tfidf, search.df)
+            knn_filtered_df = search.filter_articles_knn(query, search.knn, search.tfidf, search.df)
+            hnsw_filtered_df = search.filter_articles_hnsw(query, search.index, search.model, search.hnsw_df)
+            # Combine KNN and HNSW filtered results
+            combined_df = pd.concat([knn_filtered_df, hnsw_filtered_df], ignore_index=True)                
+            # Deduplicate articles based on 'title' column
+            filtered_df = combined_df.drop_duplicates(subset='title', keep='first')
         
         # Show number of results
         num_results = len(filtered_df)
@@ -87,10 +91,16 @@ def display_search():
         for idx, row in filtered_df.iterrows():
             st.write(f"**Title:** {row['title']}")
             st.write(f"**Authors:** {row['authors']}")
+            
+              # Display clickable link to open the newspaper
+            if 'article_id' in row and row['article_id']:
+                st.markdown(f"[**Read Full Article**](https://arxiv.org/abs/{row['article_id']})", unsafe_allow_html=True)
 
             # Display first 300 characters of the abstract
             short_abstract = row['abstract'][:300]
             st.write(f"**Abstract:** {short_abstract}...")
+            st.write(f"**Searching model:** {row['model']}")
+            st.write(f"**Cosine similarity score :** {row['score']}")
 
             # "Show More" expander for the full abstract
             with st.expander("View all abstract"):

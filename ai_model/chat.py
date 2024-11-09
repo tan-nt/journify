@@ -97,18 +97,18 @@ def display_chat():
     # If the prompt is initialized or if the user is asking for a rerun, we
     # launch the chat completion by the LLM
     if prompt or ("rerun" in st.session_state and st.session_state["rerun"]):
+        print('promt=', prompt)
         with st.chat_message("assistant", avatar=assistant_avatar):
             stream = client.chat.completions.create(
                 model=st.session_state["openai_model"],
-                messages=[
+            messages=[
                     {"role": m["role"], "content": m["content"]}
                     for m in st.session_state["messages"]
                 ],
                 stream=True,
-                max_tokens=300,  # Limited to 300 tokens for demo purposes
             )
             response = st.write_stream(stream)
-        st.session_state["messages"].append({"role": "assistant", "content": response})
+            st.session_state["messages"].append({"role": "assistant", "content": response})
         # In case this is a rerun, we set the "rerun" state back to False
         if "rerun" in st.session_state and st.session_state["rerun"]:
             st.session_state["rerun"] = False

@@ -354,7 +354,15 @@ def display_user_logger_analysis():
         
         
 def display_sentiment_analysis():
-    # Load and display first dataset
+     # Display title and link to the Kaggle dataset
+    st.title("Sentiment Analysis Dataset Exploration.")
+    st.markdown(
+        """
+        [**Twitter and Reddit Sentimental Analysis Dataset on Kaggle**](https://www.kaggle.com/datasets/cosmos98/twitter-and-reddit-sentimental-analysis-dataset/code?datasetId=429085&sortBy=voteCount)
+        """
+    )
+    st.markdown("The simple LSTM will be used for the best efficiency for solving the problem")
+    
     st.subheader("Dataset 1: Twitter Sentiment Analysis Data Preview (First 5 rows)")
     df1 = pd.read_csv('database/sentimental_analysis/Twitter_Data.csv')  # Example for df1, adjust as needed
     st.write(df1.head())  # Display the first few rows in Streamlit
