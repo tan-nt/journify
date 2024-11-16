@@ -73,7 +73,7 @@ def preprocess_and_fit_hnsw(df, title_weight=0.7, abstract_weight=0.3):
         print("No valid content to process.")
         return None, None, df
     
-    model = SentenceTransformer('all-MiniLM-L6-v2')
+    model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
     
     # Generate separate embeddings for title and abstract
     title_embeddings = model.encode(df['title'].fillna('').tolist(), convert_to_tensor=False)
