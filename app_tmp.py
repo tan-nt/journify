@@ -1,11 +1,9 @@
 import streamlit as st
 from page.about_us import display_about_us
 from page.home import display_search
-from page.introducion import display_introduction
 from page.data_exploration import display_article_analysis, display_user_logger_analysis, display_sentiment_analysis
 from page.recommendation import display_article_recommendation
 import requests
-import base64
 import streamlit as st
 from openai import OpenAI
 import logging
@@ -97,40 +95,16 @@ def display_main_tabs():
 if "page" not in st.session_state:
     st.session_state["page"] = "home"
 
-# Function to encode images to base64
-def load_image(image_file):
-    try:
-        with open(image_file, "rb") as file:
-            return base64.b64encode(file.read()).decode()
-    except Exception as e:
-        st.error(f"Error loading image: {e}")
-        return None
-
-journify_logo = load_image("resource/journify_logo.png")
-
-# st.sidebar.image("resource/journify.png")
-# Centered Logo and Additional Sidebar Content
-if journify_logo is None:
-    st.error("Logo file not found!")
-else:
-    st.sidebar.markdown(
-        """
-        <div style="display: flex; justify-content: center; gap: 20px; margin: 10px 0;">
-            <img src="data:image/png;base64,{journify_logo}" alt="Intelligent Article Explorer Logo" width="200">
-        </div>
-        """.format(journify_logo=journify_logo), 
-        unsafe_allow_html=True
-    )
-
+st.sidebar.image("resource/journify.png")
 st.sidebar.header("Navigation")
 # Create a stylish sidebar menu
 with st.sidebar:
     selected = option_menu(
         menu_title=None,  # Remove the redundant menu title
-        # options=["🏠 Home", 👋 Introduction", "💬 Go Chat", "🔮 Prediction", "🤖 AI Model Exploration"],
+        # options=["🏠 Home", "💬 Go Chat", "🔮 Prediction", "🤖 AI Model Exploration"],
         # icons=["house", "chat-dots", "graph-up", "robot"],  # Optional icons for each menu item
-        options=["🏠 Home", "👋 Introduction", "💬 Go Chat", "🔮 Prediction"],
-        icons=["house", "person-circle", "chat-dots", "graph-up"],  # Optional icons for each menu item
+        options=["🏠 Home", "💬 Go Chat", "🔮 Prediction"],
+        icons=["house", "chat-dots", "graph-up"],  # Optional icons for each menu item
         menu_icon="cast",  # Icon for the menu itself
         default_index=0,  # Default selected option
         styles={
@@ -148,8 +122,6 @@ with st.sidebar:
 # Update session state based on the selected menu option
 if selected == "🏠 Home":
     st.session_state["page"] = "home"
-elif selected == "👋 Introduction":
-    st.session_state["page"] = "introduction"
 elif selected == "💬 Go Chat":
     st.session_state["page"] = "chat"
 elif selected == "🔮 Prediction":
@@ -162,8 +134,6 @@ elif selected == "🔮 Prediction":
 if st.session_state["page"] == "home":
     st.title("Welcome to the Home Page!")
     # Add your home page content here
-elif st.session_state["page"] == "introduction":
-    st.title("Welcome to the Introduction Page!")
 elif st.session_state["page"] == "chat":
     st.title("Let's Chat!")
     # Add your chat page content here
@@ -177,84 +147,71 @@ if "page" not in st.session_state:
 # Render content based on the current page
 if st.session_state.page == "home":
     display_main_tabs()
-elif st.session_state.page == "introduction":
-    display_introduction()
 elif st.session_state.page == "chat":
     display_chat()
 elif st.session_state.page == "prediction":
     display_prediction()
 
+st.sidebar.header("How to use Journify")
 st.sidebar.header("About")
 
-# Brief, engaging description with emojis and enhanced formatting
-st.sidebar.markdown(
-    """
-    <div style='text-align: center;'>
-    <h1>🌱 Welcome to Journify 🌱</h1>
-    <div>
-    """, unsafe_allow_html=True
-)
-st.sidebar.markdown(
-    """
-    <div style='text-align: justify;'>
-    Your intelligent journal explorer powered by AI. Journify empowers scholars and curious minds by providing:
-    <ul>
-        <li>🔍 <strong>Curated Article Recommendations</strong> across a wide range of topics.</li>
-        <li>🤖 <strong>AI-driven Q&A Chatbot</strong> for quick, accurate answers to your research questions.</li>
-    </ul>
-    </div>
-    """, unsafe_allow_html=True
-)
+with st.sidebar:
+    st.markdown(
+        "Welcome to **Journify** (Intelligent Journal Explorer), an AI-powered platform designed to provide users with curated article recommendations and an intelligent Q&A chatbot for arXiv papers."
+    )
+    st.markdown(
+        """
+        Journify leverages advanced AI models to deliver relevant content and insights. Our platform combines multiple state-of-the-art techniques, such as:
+        - **KNN** for subject classification and filtering.
+        - **Bayesian Search** for intelligent querying.
+        - **HNSW-ANN and BERT (Weaviate)** for high-accuracy recommendation systems.
+        - **LLM + RAG** for Q&A with our chatbot, providing quick, reliable answers to your research questions.
+        """
+    )
+    st.markdown("Created by the Journify Team.")
+    # Add "Star on GitHub" link to the sidebar
+    st.sidebar.markdown(
+        "⭐ Star on GitHub: [![Star on GitHub](https://img.shields.io/github/stars/tan-nt/real-life-streamlit-app?style=social)](https://github.com/tan-nt/real-life-streamlit-app)"
+    )
+    st.markdown("""---""")
 
-st.sidebar.markdown("---")
-
-# Vision and Mission Statement
-st.sidebar.markdown(
-    """
-    <div style='text-align: center;'>
-    <h2>🚀 Learning into Lifelong Growth 🚀</h2>
-    <strong>Journify</strong> is to support your journey toward academic excellence.<br> 
-    <em>Join us in unlocking new possibilities through knowledge and innovation.</em>
-    </div>
-    """, unsafe_allow_html=True
-)
-
-st.sidebar.markdown("---")
-
-st.sidebar.markdown(
-    """
-    <div style='text-align: center;'>
-        <h3>⭐ Explore, Learn, and Grow with Journify! ⭐</h3>
-    </div>
-    """, unsafe_allow_html=True
-)
-
-st.sidebar.markdown(
-    """
-    <div style='text-align: center;'>
-        <a href="https://github.com/tan-nt/real-life-streamlit-app">
-            <img src="https://img.shields.io/github/stars/tan-nt/real-life-streamlit-app?style=social" alt="Star on GitHub">
-        </a>
-    </div>
-    """, unsafe_allow_html=True
-)
-
-st.sidebar.markdown("---")
-
-# FAQ Section with collapsible details for interactivity
+# Add "FAQs" section to the sidebar
 st.sidebar.header("FAQs")
-with st.sidebar.expander("What is Journify?"):
-    st.write("Journify is a platform that leverages AI to recommend articles and answer research questions, providing you with an academic companion for discovery and insight.")
-
-with st.sidebar.expander("How does Journify work?"):
-    st.write("Using advanced algorithms such as KNN classification, Bayesian search, and recommendation models, Journify personalizes high-accuracy content based on your research needs.")
-
-with st.sidebar.expander("Is my data stored?"):
-    st.write("No, all queries are processed in real-time and deleted at the session's end to ensure privacy.")
-
-with st.sidebar.expander("Why might responses take some time?"):
-    st.write("Complex queries require additional processing time. Free-tier users may experience some delay due to system limits.")
-
-st.sidebar.markdown("---")
-st.sidebar.markdown("📘 **Tips for Best Results**: Provide detailed questions for more accurate recommendations and improved insights.")
+with st.sidebar:
+    st.markdown(
+        """
+    ### **What is Journify?**
+    Journify is an intelligent journal exploration tool designed to recommend the best articles and answer queries from arXiv using AI. It combines various machine learning techniques to provide relevant, curated content and a seamless research experience.
+    """
+    )
+    st.markdown(
+        """
+    ### **How does Journify work?**
+    Journify utilizes a combination of KNN for classification, Bayesian methods for search, HNSW-ANN and BERT (via Weaviate) for recommendations, and an LLM + RAG-based chatbot to deliver efficient and accurate recommendations and insights.
+    """
+    )
+    st.markdown(
+        """
+    ### **Do you store the queries or recommendations?**
+    No, Journify does not store any personal data or queries. All interactions are temporary and are cleared after the session ends.
+    """
+    )
+    st.markdown(
+        """
+    ### **Why does it take time to generate recommendations or answer queries?**
+    Processing can vary based on query complexity and system load. Free users may experience slower response times due to rate limits. Consider using a paid tier for faster responses.
+    """
+    )
+    st.markdown(
+        """
+    ### **Are recommendations and answers always accurate?**
+    While Journify uses advanced models, results may not be 100% accurate. Machine learning models like BERT and LLMs can sometimes misinterpret or 'hallucinate' content. We recommend using Journify's output as a guide and verifying with additional sources if needed.
+    """
+    )
+    st.markdown(
+        """
+    ### **How can I get the best recommendations and answers?**
+    Provide detailed queries and specify topics clearly. The more context you give, the more relevant and accurate the recommendations and responses from Journify will be.
+    """
+    )
     
