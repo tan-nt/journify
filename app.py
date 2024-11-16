@@ -163,9 +163,15 @@ if st.session_state["page"] == "home":
     st.title("Welcome to the Home Page!")
     # Add your home page content here
 elif st.session_state["page"] == "introduction":
-    st.title("Welcome to the Introduction Page!")
+    st.sidebar.markdown(
+        """
+        <div style='text-align: center;'>
+        <h1>🌱 Welcome to Journify 🌱</h1>
+        <div>
+        """, unsafe_allow_html=True
+    )
 elif st.session_state["page"] == "chat":
-    st.title("Let's Chat!")
+    st.title("Let's ask any research-related questions!")
     # Add your chat page content here
 elif st.session_state["page"] == "prediction":
     st.title("Go to predict trends!")

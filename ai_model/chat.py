@@ -74,7 +74,7 @@ def display_chat():
         ):
             st.markdown(message["content"])
     # A chat input will add the corresponding prompt to the st.session_state["messages"]
-    if prompt := st.chat_input("How can I help you?"):
+    if prompt := st.chat_input("How can I help you understand any concepts of the newspaper?"):
         st.session_state["messages"].append({"role": "user", "content": prompt})
         # and display it in the chat history
         with st.chat_message("user", avatar=user_avatar):
