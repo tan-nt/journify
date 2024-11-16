@@ -5,6 +5,16 @@ import random
 from datetime import datetime, timedelta
 import pandas as pd
 
+# Define a function to determine relevance based on the score
+# Define a function to determine relevance and style based on the score
+def get_relevance_label_and_style(score):
+    if score < 0.3:
+        return "LOW RELEVANCE", "background-color: #FF4C4C; color: white; border-radius: 5px; padding: 5px 10px;"
+    elif 0.3 <= score < 0.7:
+        return "MEDIUM RELEVANCE", "background-color: #FFD700; color: black; border-radius: 5px; padding: 5px 10px;"
+    else:
+        return "HIGH RELEVANCE", "background-color: #4CAF50; color: white; border-radius: 5px; padding: 5px 10px;"
+
 def display_search():
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -68,8 +78,28 @@ def display_search():
         </style>
     """, unsafe_allow_html=True)
     
-    # Search input
-    query = st.text_input("Search for articles...", key="search_query")
+    st.write("### Top 5 Popular Keywords")
+    # Example popular keywords
+    popular_keywords = ["Quark Model", "languages", "physical laws", "Quantum", "Kiz function"]
+
+    # Session state to hold the selected keyword
+    if "selected_keyword" not in st.session_state:
+        st.session_state.selected_keyword = ""
+
+    # Display popular keywords above the search bar
+    cols = st.columns(len(popular_keywords))  # Create a column for each keyword
+
+    for col, keyword in zip(cols, popular_keywords):
+        with col:
+            if st.button(f"🔍 {keyword}"):
+                st.session_state.selected_keyword = keyword
+    
+    # Search bar prefilled with the selected keyword
+    query = st.text_input(
+        "Search for articles...",
+        value=st.session_state.selected_keyword,  # Prefill the search bar
+        key="search_query"
+    )
 
     if query:
         # Loading spinner while processing search results
@@ -84,7 +114,31 @@ def display_search():
         
         # Show number of results
         num_results = len(filtered_df)
+        # Initialize counters for relevance categories
+        low_relevance_count = 0
+        medium_relevance_count = 0
+        high_relevance_count = 0
+        
+        # Iterate through the dataframe to calculate counts and display results
+        for _, row in filtered_df.iterrows():
+            relevance_label, _ = get_relevance_label_and_style(row['score'])
+
+            # Increment counters based on relevance
+            if relevance_label == "LOW RELEVANCE":
+                low_relevance_count += 1
+            elif relevance_label == "MEDIUM RELEVANCE":
+                medium_relevance_count += 1
+            elif relevance_label == "HIGH RELEVANCE":
+                high_relevance_count += 1
+        
         st.write(f"### {num_results} results found")
+        st.markdown(
+            f"""
+            - **High Relevance:** {high_relevance_count}
+            - **Medium Relevance:** {medium_relevance_count}
+            - **Low Relevance:** {low_relevance_count}
+            """
+        )
 
         # Display filtered results
         st.subheader("Search Results")
@@ -99,6 +153,14 @@ def display_search():
             # Display first 300 characters of the abstract
             short_abstract = row['abstract'][:300]
             st.write(f"**Abstract:** {short_abstract}...")
+            
+              # Get relevance label and style
+            relevance_label, style = get_relevance_label_and_style(row['score'])
+            st.markdown(
+                f'<span style="{style}">{relevance_label}</span>',
+                unsafe_allow_html=True,
+            )
+            
             st.write(f"**Searching model:** {row['model']}")
             st.write(f"**Cosine similarity score :** {row['score']}")
 
