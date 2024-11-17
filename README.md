@@ -100,8 +100,41 @@ Explore the world of academic research with **Journify**, an AI-powered platform
 </div>
 
 ## Running at:
+<div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+    <!-- Session 1 -->
+    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
+        <img style="display: block; margin: 0 auto; width: 70%;" alt="Streamlit demo app 1" src="./doc/demo-app-1.png">
+        <em>Figure 1: The search bar interface for entering queries.</em>
+    </div>
+    <!-- Session 2 -->
+    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
+        <img style="display: block; margin: 0 auto; width: 70%;" alt="Streamlit demo app 2" src="./doc/demo-app-2.png">
+        <em>Figure 2: Search results with labeled similarity scores.</em>
+    </div>
+    <!-- Session 3 -->
+    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
+        <img style="display: block; margin: 0 auto; width: 70%;" alt="Streamlit demo app 3" src="./doc/demo-app-3.png">
+        <em>Figure 3: Comments with sentiment analysis categorized as Neutral, Negative, or Positive.</em>
+    </div>
+    <!-- Session 4 -->
+    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
+        <img style="display: block; margin: 0 auto; width: 70%;" alt="Streamlit demo app 4" src="./doc/demo-app-4.png">
+        <em>Figure 4: Item-based recommendation results.</em>
+    </div>
+    <!-- Session 5 -->
+    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
+        <img style="display: block; margin: 0 auto; width: 70%;" alt="Streamlit demo app 5" src="./doc/demo-app-5.png">
+        <em>Figure 5: Top popular articles sorted by citation counts.</em>
+    </div>
+    <!-- Add More Sessions as Needed -->
+    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
+        <img style="display: block; margin: 0 auto; width: 70%;" alt="Streamlit demo app 17" src="./doc/demo-app-17.png">
+        <em>Figure 17: Predictions for daily login numbers.</em>
+    </div>
+</div>
+
 - [Access the app via the streamlit](https://journify-imp.streamlit.app/)
- - [Your local machine at the port 8501](http://0.0.0.0:8501/)
+- [Your local machine at the port 8501](http://0.0.0.0:8501/)
 
 ## Description
 
