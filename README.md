@@ -3,6 +3,7 @@
 Explore the world of academic research with **Journify**, an AI-powered platform for article recommendations and a smart Q&A chatbot tailored to your interests in the arXiv repository.
 
 ## Cool features:
+
     - Fast and Intelligent Search: Our search engine provides quick results with accurate keyword matching and similar keyword detection, making it easy to find what you’re looking for.
     - Personalized Recommendations: We offer both content-based and customer-based recommendation algorithms to deliver tailored suggestions that match your interests and needs.
     - Comprehensive Data Exploration: Explore your data through user-friendly tabs with clear and visually appealing graphics to better understand and analyze information.
@@ -10,29 +11,33 @@ Explore the world of academic research with **Journify**, an AI-powered platform
     - Trend Prediction Insights: Stay informed about trends in publications and potential attacker activities, giving you an edge in preparation and planning.
     - Sentiment Analysis for Feedback: Analyze comments and feedback with sentiment analysis to evaluate user opinions and improve journal quality effectively.
 
-
 ## User Interface Preview
+
 <p align="center">
     <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-1.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-2.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-3.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-4.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-5.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-6.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-7.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-8.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-9.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-10.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-11.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-12.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-13.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-14.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-15.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-16.png">
-    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-17.png">
+    <br/>
+    <em>Figure 1: The demo app visualizes user data and provides real-time interactivity through dynamic plots and charts.</em>
+    <br/>
+    <img width="70%" alt="Streamlit demo app 2" src="./doc/demo-app-2.png">
+    <img width="70%" alt="Streamlit demo app 3" src="./doc/demo-app-3.png">
+    <img width="70%" alt="Streamlit demo app 4" src="./doc/demo-app-4.png">
+    <img width="70%" alt="Streamlit demo app 5" src="./doc/demo-app-5.png">
+    <img width="70%" alt="Streamlit demo app 6" src="./doc/demo-app-6.png">
+    <img width="70%" alt="Streamlit demo app 7" src="./doc/demo-app-7.png">
+    <img width="70%" alt="Streamlit demo app 8" src="./doc/demo-app-8.png">
+    <img width="70%" alt="Streamlit demo app 9" src="./doc/demo-app-9.png">
+    <img width="70%" alt="Streamlit demo app 10" src="./doc/demo-app-10.png">
+    <img width="70%" alt="Streamlit demo app 11" src="./doc/demo-app-11.png">
+    <img width="70%" alt="Streamlit demo app 12" src="./doc/demo-app-12.png">
+    <img width="70%" alt="Streamlit demo app 13" src="./doc/demo-app-13.png">
+    <img width="70%" alt="Streamlit demo app 14" src="./doc/demo-app-14.png">
+    <img width="70%" alt="Streamlit demo app 15" src="./doc/demo-app-15.png">
+    <img width="70%" alt="Streamlit demo app 16" src="./doc/demo-app-16.png">
+    <img width="70%" alt="Streamlit demo app 17" src="./doc/demo-app-17.png">
 </p>
 
 ## Running at:
+
     -[Access the app via the streamlit](https://journify-imp.streamlit.app/)
     - [Your local machine at the port 8501](http://0.0.0.0:8501/)
 
