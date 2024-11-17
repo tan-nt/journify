@@ -99,13 +99,9 @@ Explore the world of academic research with **Journify**, an AI-powered platform
     </div>
 </div>
 
-
 ## Running at:
-
-    -[Access the app via the streamlit](https://journify-imp.streamlit.app/)
-    - [Your local machine at the port 8501](http://0.0.0.0:8501/)
-
----
+- [Access the app via the streamlit](https://journify-imp.streamlit.app/)
+ - [Your local machine at the port 8501](http://0.0.0.0:8501/)
 
 ## Description
 
