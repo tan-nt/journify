@@ -11,128 +11,94 @@ Explore the world of academic research with **Journify**, an AI-powered platform
 - Sentiment Analysis for Feedback: Analyze comments and feedback with sentiment analysis to evaluate user opinions and improve journal quality effectively.
 
 ## User Interface Preview
-<div style="display: flex; flex-direction: column; align-items: center;">
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-1.png">
-        <br/>
-        <em>Figure 1: The search bar interface for entering queries.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 2" src="./doc/demo-app-2.png">
-        <br/>
-        <em>Figure 2: Search results with labeled similarity scores.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 3" src="./doc/demo-app-3.png">
-        <br/>
-        <em>Figure 3: Comments with sentiment analysis categorized as Neutral, Negative, or Positive.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 4" src="./doc/demo-app-4.png">
-        <br/>
-        <em>Figure 4: Item-based recommendation results.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 5" src="./doc/demo-app-5.png">
-        <br/>
-        <em>Figure 5: Top popular articles sorted by citation counts.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 6" src="./doc/demo-app-6.png">
-        <br/>
-        <em>Figure 6: Recommendations based on user preferences.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 7" src="./doc/demo-app-7.png">
-        <br/>
-        <em>Figure 7: Analytics and visualizations for articles.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 8" src="./doc/demo-app-8.png">
-        <br/>
-        <em>Figure 8: Charts showing top authors and publication trends.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 9" src="./doc/demo-app-9.png">
-        <br/>
-        <em>Figure 9: Monthly submission frequency visualized.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 10" src="./doc/demo-app-10.png">
-        <br/>
-        <em>Figure 10: Sentiment analysis visualization for feedback.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 11" src="./doc/demo-app-11.png">
-        <br/>
-        <em>Figure 11: Sentiment distribution of positive and negative comments.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 12" src="./doc/demo-app-12.png">
-        <br/>
-        <em>Figure 12: App introduction and user guide interface.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 13" src="./doc/demo-app-13.png">
-        <br/>
-        <em>Figure 13: Additional app guidance for new users.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 14" src="./doc/demo-app-14.png">
-        <br/>
-        <em>Figure 14: Academic chatbot for personalized assistance.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 15" src="./doc/demo-app-15.png">
-        <br/>
-        <em>Figure 15: Predicted trends for academic publications.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 16" src="./doc/demo-app-16.png">
-        <br/>
-        <em>Figure 16: Predictions for the number of comments received.</em>
-    </div>
-    <div style="margin-bottom: 30px; text-align: center;">
-        <img width="70%" alt="Streamlit demo app 17" src="./doc/demo-app-17.png">
-        <br/>
-        <em>Figure 17: Predictions for daily login numbers.</em>
-    </div>
-</div>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 1" src="./doc/demo-app-1.png">
+    <br/>
+    <em>Figure 1: The search bar interface for entering queries.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 2" src="./doc/demo-app-2.png">
+    <br/>
+    <em>Figure 2: Search results with labeled similarity scores.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 3" src="./doc/demo-app-3.png">
+    <br/>
+    <em>Figure 3: Comments with sentiment analysis categorized as Neutral, Negative, or Positive.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 4" src="./doc/demo-app-4.png">
+    <br/>
+    <em>Figure 4: Item-based recommendation results.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 5" src="./doc/demo-app-5.png">
+    <br/>
+    <em>Figure 5: Top popular articles sorted by citation counts.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 6" src="./doc/demo-app-6.png">
+    <br/>
+    <em>Figure 6: Recommendations based on user preferences.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 7" src="./doc/demo-app-7.png">
+    <br/>
+    <em>Figure 7: Analytics and visualizations for articles.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 8" src="./doc/demo-app-8.png">
+    <br/>
+    <em>Figure 8: Charts showing top authors and publication trends.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 9" src="./doc/demo-app-9.png">
+    <br/>
+    <em>Figure 9: Monthly submission frequency visualized.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 10" src="./doc/demo-app-10.png">
+    <br/>
+    <em>Figure 10: Sentiment analysis visualization for feedback.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 11" src="./doc/demo-app-11.png">
+    <br/>
+    <em>Figure 11: Sentiment distribution of positive and negative comments.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 12" src="./doc/demo-app-12.png">
+    <br/>
+    <em>Figure 12: App introduction and user guide interface.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 13" src="./doc/demo-app-13.png">
+    <br/>
+    <em>Figure 13: Additional app guidance for new users.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 14" src="./doc/demo-app-14.png">
+    <br/>
+    <em>Figure 14: Academic chatbot for personalized assistance.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 15" src="./doc/demo-app-15.png">
+    <br/>
+    <em>Figure 15: Predicted trends for academic publications.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 16" src="./doc/demo-app-16.png">
+    <br/>
+    <em>Figure 16: Predictions for the number of comments received.</em>
+</p>
+<p align="center">
+    <img width="70%" alt="Streamlit demo app 17" src="./doc/demo-app-17.png">
+    <br/>
+    <em>Figure 17: Predictions for daily login numbers.</em>
+</p>
+
 
 ## Running at:
-<div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-    <!-- Session 1 -->
-    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
-        <img style="display: block; margin: 0 auto; width: 70%;" alt="Streamlit demo app 1" src="./doc/demo-app-1.png">
-        <em>Figure 1: The search bar interface for entering queries.</em>
-    </div>
-    <!-- Session 2 -->
-    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
-        <img style="display: block; margin: 0 auto; width: 70%;" alt="Streamlit demo app 2" src="./doc/demo-app-2.png">
-        <em>Figure 2: Search results with labeled similarity scores.</em>
-    </div>
-    <!-- Session 3 -->
-    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
-        <img style="display: block; margin: 0 auto; width: 70%;" alt="Streamlit demo app 3" src="./doc/demo-app-3.png">
-        <em>Figure 3: Comments with sentiment analysis categorized as Neutral, Negative, or Positive.</em>
-    </div>
-    <!-- Session 4 -->
-    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
-        <img style="display: block; margin: 0 auto; width: 70%;" alt="Streamlit demo app 4" src="./doc/demo-app-4.png">
-        <em>Figure 4: Item-based recommendation results.</em>
-    </div>
-    <!-- Session 5 -->
-    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
-        <img style="display: block; margin: 0 auto; width: 70%;" alt="Streamlit demo app 5" src="./doc/demo-app-5.png">
-        <em>Figure 5: Top popular articles sorted by citation counts.</em>
-    </div>
-    <!-- Add More Sessions as Needed -->
-    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
-        <img style="display: block; margin: 0 auto; width: 70%;" alt="Streamlit demo app 17" src="./doc/demo-app-17.png">
-        <em>Figure 17: Predictions for daily login numbers.</em>
-    </div>
-</div>
-
 - [Access the app via the streamlit](https://journify-imp.streamlit.app/)
 - [Your local machine at the port 8501](http://0.0.0.0:8501/)
 
